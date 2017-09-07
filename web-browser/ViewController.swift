@@ -41,6 +41,22 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+}
 
+extension ViewController: UISearchBarDelegate, UIWebViewDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        if let url = URL(string: searchBar.text!){
+            webView.loadRequest(URLRequest(url: url))
+        } else {
+            print("Error")
+        }
+    }
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
 }
 
