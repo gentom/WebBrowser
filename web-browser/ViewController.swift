@@ -10,9 +10,30 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var webView: UIWebView!
+    
+    @IBAction func previous(_ sender: Any) {
+        if webView.canGoBack{
+            webView.goBack()
+        }
+    }
+    
+    @IBAction func next(_ sender: Any) {
+        if webView.canGoForward{
+            webView.goForward()
+        }
+    }
+    
+    @IBAction func refresh(_ sender: Any) {
+        webView.reload()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        webView.loadRequest(URLRequest(url: URL(string: "https://www.google.com")!))
     }
 
     override func didReceiveMemoryWarning() {
